@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Hello,{{ user['nickname'] }}</h1>
+    <!--h1>Hello,{{ user.nickname }}</h1-->
+    <form action="" method="POST" name="post">
+    {{ form.csrf_token }}
+        <table>
+            <tr>
+                <td>Say something:</td>
+                <td>{{ form.post }}</td>
+                <td>
+                    {% for error in form.errors.post %}
+                    <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="POST" class="btn"></td>
+                <td></td>
+            </tr>
+        </table>
+
+    </form>
+    {% if posts %}
+        {% include 'post_tmp.html' %}
+        {% if has_pre_page %}
+            <a href="{{ url_for('index',page=pre_page_num) }}"> << Newer posts </a>
+        {% else %}
+            << Newer posts
+        {% endif %}|
+        {% if has_next_page %}
+            <a href="{{ url_for('index',page=next_page_num) }}"> Older posts >> </a>
+        {% else %}
+            Older posts>>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

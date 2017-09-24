@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Edit Your Profile</h1>
+    <form action="" name="edit" method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <table>
+            <tr>
+                <td>{{ form.nickname.label }}</td>
+                <td>{{ form.nickname(size=24) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.description.label }}</td>
+                <td>{{ form.description(cols = 32,rows=4) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.image.label }}</td>
+                <td>{{ form.image() }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value ="Save Changes">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+{% endblock %}

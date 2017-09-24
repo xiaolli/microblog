@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table>
+        <tr valign="top">
+            <td><img src="{{user.get_imgpath()}}" style="display:flex" width="150" height="150"></td>
+
+            <td><h1>User:{{ user['nickname'] }}</h1></td>
+
+            <!--h1>Hello,{{ user.nickname }}</h1-->
+            {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+            {% if user.last_seen %}<p><i>Last Seen on:{{ user.last_seen }}</i></p>{% endif %}
+            <p>
+                {{ user.followers.count() }}followers |
+                {% if user.id == current_user.id %}
+                    <a href="{{ url_for('edit') }}">Edit your profile</a>
+                {% elif not current_user.is_following(user) %}
+                    <a href="{{ url_for('follow',username=user.username)}}">Follow</a>
+                {% else %}
+                    <a href="{{ url_for('unfollow',username=user.username)}}">Unfollow</a>
+                {% endif %}
+            </p>
+
+            {% if user.id == current_user.id %}<p><a href="{{ url_for('edit') }}">Edit</a> </p>{% endif %}
+        </tr>
+    </table>
+    <hr>
+    {% if posts %}
+    <table>
+
+        {% include 'post_tmp.html' %}
+        {% if has_pre_page %}
+            <a href="{{ url_for('user',username=user.username,page=pre_page_num) }}"> << Newer posts </a>
+        {% else %}
+            << Newer posts
+        {% endif %}|
+        {% if has_next_page %}
+            <a href="{{ url_for('user',username=user.username,page=next_page_num) }}"> Older posts >> </a>
+        {% else %}
+            Older posts>>
+        {% endif %}
+    </table>
+    {% endif %}
+{% endblock %}

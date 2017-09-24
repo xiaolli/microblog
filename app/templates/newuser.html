@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Sign Up</h1>
+    <form action="" name="newuser" method="POST">
+    <p>
+        {{ form.csrf_token }}
+
+        {{ form.username.label }}:{{ form.username(size = 20) }}
+        {% for error in form.username.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">Username is required!</span>
+        {% endfor %}
+        <br>
+        {{ form.password.label}}:{{ form.password(size = 20 )}}
+        {% for error in form.password.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">Password is required!</span>
+        {% endfor %}
+        <br>
+            {{ form.nickname.label }}:{{ form.nickname(size = 24) }}
+        {% for error in form.nickname.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">nickname is required!</span>
+        {% endfor %}
+        <br>
+        {{ form.description.label}}:{{ form.description(cols = 32,rows=4 )}}
+        {% for error in form.description.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">description is required!</span>
+        {% endfor %}
+
+    </p>
+    <p><input type="submit" value = 'Sign Up'></p>
+    </form>
+{% endblock %}

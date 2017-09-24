@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="login" name="login" method="POST">
+    <p>
+        {{ form.csrf_token }}
+
+        {{ form.username.label }}:{{ form.username(size = 20) }}
+        {% for error in form.username.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">Username is required!</span>
+        {% endfor %}
+        <br>
+        {{ form.password.label}}:{{ form.password(size = 20 )}}
+        {% for error in form.password.errors %}
+            <!--span style="color: red;">{{ error }}</span><br-->
+            <span style="color: red;">Password is required!</span>
+        {% endfor %}
+
+    </p>
+    <p><input type="submit" value = 'Sign In'></p>
+    </form>
+{% endblock %}

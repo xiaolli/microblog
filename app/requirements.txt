@@ -1,0 +1,16 @@
+flask
+Flask-WTF
+flask-login
+flask-openid
+flask-mail
+flask-sqlalchemy
+sqlalchemy-migrate
+flask-whooshalchemy
+flask-babel
+guess-language
+flipflop
+coverage
+pymongo
+gunicorn
+
+alembic
